@@ -1,7 +1,3 @@
-
-
-# German
-
 ## Beschreibung
 In diesem Projekt seht ihr meine DIY Rolladensteuerung für das bestehende Ikea System. Mit leichten anpassungen wäre es aber auch möglich, andere Systeme zu Automatisieren.
 z.B welche von Lidl, Aldi oder sonstigen Marken.
