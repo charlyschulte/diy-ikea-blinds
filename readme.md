@@ -26,7 +26,7 @@ this is how i got my arduino blind controller to work.
 
 ## First step: scematics:
 
-![scematics](link-to-image)
+![scematics](https://github.com/charlyschulte/diy-ikea-blinds/blob/master/scematic.png)
 
 ##Parts:
 You need the printable parts for the ikea blinds, provided in git and these parts:
