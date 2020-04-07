@@ -1,12 +1,12 @@
 
 
-#German
+# German
 
-##Beschreibung
+## Beschreibung
 In diesem Projekt seht ihr meine DIY Rolladensteuerung für das bestehende Ikea System. Mit leichten anpassungen wäre es aber auch möglich, andere Systeme zu Automatisieren.
 z.B welche von Lidl, Aldi oder sonstigen Marken.
 
-##Teile
+## Teile
 Ihr müsst euch die unten genannten Teile bestellen, dabei habt ihr die Auswahl zwischen den Arduino mega 2650 + Ethernet Shield oder dem wemos d1 mini, der zwar weniger
 ports und kein ethernet bietet, dafür aber wesentlich günstiger ist und wifi mit an bord hat.
 
@@ -14,7 +14,7 @@ Ansonsten müssen die unten verlinkten teile einmal Ausgedruckt werden und nach 
 Dabei sendet man einen wert zwischen 31 und -31. Ist der wert Positiv (>0 ), fährt der Motor in die eine Richtung (Rollo hoch), ist der Wert negativ, fährt der Motor in die andere
 (Rollor runter)
 
-##Wichtig
+## Wichtig
 Mittlweile wird die aktuelle Position des Rollos im Speicher des Arduinos gehalten, damit man nicht versentlich weiter runter (oder hoch) fährt, obwohl das Rollo schon seine
 endposition erreicht hat.
 Dazu ist es allerdings zwingend notwendig, beim ersten in Betrieb nehmen, das Rollo komplett nach unten zu fahren, und per MQTT auf das Topic "Buero/Fenster/Blinds/all/save"
