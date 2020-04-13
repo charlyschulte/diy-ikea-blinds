@@ -42,9 +42,9 @@ byte StepPattern[NrOfPatternsOneStep][NrOfMotorOutputs] =
 };
 
 //Motor Pins für Ausgänge 1-4 definieren
-byte MotorOutputPin3[NrOfMotorOutputs] = {40, 38, 41, 39};
+byte MotorOutputPin2[NrOfMotorOutputs] = {40, 38, 41, 39};
 byte MotorOutputPin1[NrOfMotorOutputs] = {24, 22, 25, 23};
-byte MotorOutputPin2[NrOfMotorOutputs] = {28, 26, 29, 27};
+byte MotorOutputPin3[NrOfMotorOutputs] = {28, 26, 29, 27};
 
 /////////////// Funktion für Motoransteuerung Anfang //////////////////
 void MotorMove(byte MotorDir, unsigned int MotorSpeed, unsigned int StepsToGo, byte MotorOutputPin[NrOfMotorOutputs])
@@ -94,52 +94,29 @@ void MotorMove(byte MotorDir, unsigned int MotorSpeed, unsigned int StepsToGo, b
 }
 void MotorDirectionMove(int Integer, byte MotorOutputPin[NrOfMotorOutputs], int motorindex)
 {
-
-  if (Integer == 0)
-  {
-    Serial.println("MotorStop");
-    MotorMove(MotorOff, 0, 0, MotorOutputPin);
-  }
-  else if (Integer > 0)
-  {
-    if (EEPROM.read(motorindex) <= Integer) // WENN COMMAND HÖHER ALS INDEX, FAHRE BIS NACH OBEN
-    {
-      Serial.println("EEPROM");
-      Serial.print(EEPROM.read(motorindex));
-      Serial.println("INDEX");
-      Serial.println(Integer);
-      Integer = EEPROM.read(motorindex);
-      EEPROM.write(motorindex, 0);
+  Serial.print("Motor:");
+  Serial.println(motorindex);
+  if (EEPROM.read(motorindex) >= 0 && EEPROM.read(motorindex) <= 31 && Integer >= 0 && Integer <= 31)
+  { //EEPROM WERT GESETZT
+    if (EEPROM.read(motorindex) < Integer)
+    { //RUNTERFAHREN
+      Serial.print("TURN DOWN");
+      Serial.print(Integer);
+      MotorMove(DirMotorRight, 1, 2048 * (Integer - EEPROM.read(motorindex)), MotorOutputPin);
+      MotorMove(MotorOff, 0, 0, MotorOutputPin);
+      EEPROM.write(motorindex, Integer);
+    }
+    else if (EEPROM.read(motorindex) > Integer)
+    { //HOCHFAHREN
+      Serial.print("TURN UP");
+      Serial.print(Integer);
+      MotorMove(DirMotorLeft, 1, 2048 * (EEPROM.read(motorindex) - Integer), MotorOutputPin);
+      MotorMove(MotorOff, 0, 0, MotorOutputPin);
+      EEPROM.write(motorindex, Integer);
     }
     else
-    {
-      EEPROM.write(motorindex, EEPROM.read(motorindex) - Integer); //SETZE DEN NEUEN WERT IN DEN EEPROM
+    { // WERTE GLEICH
     }
-    Serial.println("Up");
-    Serial.println(2048 * Integer);
-    MotorMove(DirMotorLeft, 1, 2048 * Integer, MotorOutputPin);
-    MotorMove(MotorOff, 0, 0, MotorOutputPin);
-  }
-  else if (Integer < 0)
-  {
-    if (EEPROM.read(motorindex) + (Integer * -1) >= MaxStepsToGo)
-    {
-      Integer = EEPROM.read(motorindex) - MaxStepsToGo;
-      EEPROM.write(motorindex, MaxStepsToGo);
-    }
-    else
-    {
-      EEPROM.write(motorindex, EEPROM.read(motorindex) + (Integer * -1));
-    }
-    Serial.println("Down");
-    Serial.println(2048 * Integer * -1);
-    MotorMove(DirMotorRight, 1, 2048 * Integer * -1, MotorOutputPin);
-    MotorMove(MotorOff, 0, 0, MotorOutputPin);
-  }
-  else
-  {
-    Serial.println("Error");
-    Serial.println(Integer);
   }
 }
 
