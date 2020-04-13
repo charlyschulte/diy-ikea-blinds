@@ -7,8 +7,7 @@ Ihr müsst euch die unten genannten Teile bestellen, dabei habt ihr die Auswahl 
 ports und kein ethernet bietet, dafür aber wesentlich günstiger ist und wifi mit an bord hat.
 
 Ansonsten müssen die unten verlinkten teile einmal Ausgedruckt werden und nach dem Bild verlötet werden, danach sollten die Rolladen über MQTT ansteuerbar sein.
-Dabei sendet man einen wert zwischen 31 und -31. Ist der wert Positiv (>0 ), fährt der Motor in die eine Richtung (Rollo hoch), ist der Wert negativ, fährt der Motor in die andere
-(Rollor runter)
+Dabei wird ein wert zwischen 0 und (in meinem fall) 31 gesendet. 31 steht für unten und 0 für ganz oben. 
 
 ## Wichtig
 Mittlweile wird die aktuelle Position des Rollos im Speicher des Arduinos gehalten, damit man nicht versentlich weiter runter (oder hoch) fährt, obwohl das Rollo schon seine
